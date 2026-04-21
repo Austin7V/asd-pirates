@@ -65,3 +65,12 @@ const output = document.getElementById("output") as HTMLParagraphElement;
 helloBtn.addEventListener("click", () => {
     output.textContent = "Hello from TypeScript!";
 });
+
+const nameInput = document.getElementById("nameInput") as HTMLInputElement;
+const submitBtn = document.getElementById("submitBtn") as HTMLButtonElement;
+const displayName = document.getElementById("displayName") as HTMLParagraphElement;
+
+submitBtn.addEventListener("click", () => {
+    displayName.textContent = nameInput.value;
+    console.log(nameInput.value);
+});

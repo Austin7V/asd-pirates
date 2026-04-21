@@ -33,4 +33,16 @@ async function fetchBooks(term) {
     const data = (await response.json());
     return data.books ?? [];
 }
+const helloBtn = document.getElementById("helloBtn");
+const output = document.getElementById("output");
+helloBtn.addEventListener("click", () => {
+    output.textContent = "Hello from TypeScript!";
+});
+const nameInput = document.getElementById("nameInput");
+const submitBtn = document.getElementById("submitBtn");
+const displayName = document.getElementById("displayName");
+submitBtn.addEventListener("click", () => {
+    displayName.textContent = nameInput.value;
+    console.log(nameInput.value);
+});
 //# sourceMappingURL=main.js.map
