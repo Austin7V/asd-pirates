@@ -58,3 +58,10 @@ async function fetchBooks(term: string): Promise<Book[]> {
 
     return data.books ?? [];
 }
+
+const helloBtn = document.getElementById("helloBtn") as HTMLButtonElement;
+const output = document.getElementById("output") as HTMLParagraphElement;
+
+helloBtn.addEventListener("click", () => {
+    output.textContent = "Hello from TypeScript!";
+});
