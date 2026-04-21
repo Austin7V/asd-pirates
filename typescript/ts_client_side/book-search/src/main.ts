@@ -72,5 +72,11 @@ const displayName = document.getElementById("displayName") as HTMLParagraphEleme
 
 submitBtn.addEventListener("click", () => {
     displayName.textContent = nameInput.value;
-    console.log(nameInput.value);
+});
+
+const toggleBtn = document.getElementById("toggleBtn") as HTMLButtonElement;
+const hiddenText = document.getElementById("hiddenText") as HTMLParagraphElement;
+
+toggleBtn.addEventListener("click", () => {
+    hiddenText.style.display = hiddenText.style.display === "none" ? "" : "none";
 });

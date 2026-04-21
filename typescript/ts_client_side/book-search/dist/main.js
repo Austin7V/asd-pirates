@@ -43,6 +43,10 @@ const submitBtn = document.getElementById("submitBtn");
 const displayName = document.getElementById("displayName");
 submitBtn.addEventListener("click", () => {
     displayName.textContent = nameInput.value;
-    console.log(nameInput.value);
+});
+const toggleBtn = document.getElementById("toggleBtn");
+const hiddenText = document.getElementById("hiddenText");
+toggleBtn.addEventListener("click", () => {
+    hiddenText.style.display = hiddenText.style.display === "none" ? "" : "none";
 });
 //# sourceMappingURL=main.js.map
