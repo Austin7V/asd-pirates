@@ -71,4 +71,34 @@ colorSelect.addEventListener("change", (event) => {
     const select = event.target;
     colorBox.style.backgroundColor = select.value;
 });
+const textInput = document.getElementById("textInput");
+const charCount = document.getElementById("charCount");
+textInput.addEventListener("input", () => {
+    charCount.textContent = `${textInput.value.length} characters`;
+});
+const todoInput = document.getElementById("todoInput");
+const addTodoBtn = document.getElementById("addTodo");
+const todoList = document.getElementById("todoList");
+function createTodoItem(text) {
+    const item = document.createElement("li");
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.addEventListener("change", () => {
+        label.style.textDecoration = checkbox.checked ? "line-through" : "";
+    });
+    const label = document.createElement("span");
+    label.textContent = text;
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => item.remove());
+    item.append(checkbox, label, deleteBtn);
+    return item;
+}
+addTodoBtn.addEventListener("click", () => {
+    const text = todoInput.value.trim();
+    if (!text)
+        return;
+    todoList.append(createTodoItem(text));
+    todoInput.value = "";
+});
 //# sourceMappingURL=main.js.map

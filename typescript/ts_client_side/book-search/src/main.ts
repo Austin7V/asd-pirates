@@ -109,3 +109,42 @@ colorSelect.addEventListener("change", (event: Event) => {
     const select = event.target as HTMLSelectElement;
     colorBox.style.backgroundColor = select.value;
 });
+
+const textInput = document.getElementById("textInput") as HTMLTextAreaElement;
+const charCount = document.getElementById("charCount") as HTMLParagraphElement;
+
+textInput.addEventListener("input", () => {
+    charCount.textContent = `${textInput.value.length} characters`;
+});
+
+const todoInput = document.getElementById("todoInput") as HTMLInputElement;
+const addTodoBtn = document.getElementById("addTodo") as HTMLButtonElement;
+const todoList = document.getElementById("todoList") as HTMLUListElement;
+
+function createTodoItem(text: string): HTMLLIElement {
+    const item = document.createElement("li");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.addEventListener("change", () => {
+        label.style.textDecoration = checkbox.checked ? "line-through" : "";
+    });
+
+    const label = document.createElement("span");
+    label.textContent = text;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => item.remove());
+
+    item.append(checkbox, label, deleteBtn);
+    return item;
+}
+
+addTodoBtn.addEventListener("click", () => {
+    const text = todoInput.value.trim();
+    if (!text) return;
+
+    todoList.append(createTodoItem(text));
+    todoInput.value = "";
+});
