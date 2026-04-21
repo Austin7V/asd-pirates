@@ -101,3 +101,11 @@ increaseBtn.addEventListener("click", () => {
     count += 1;
     counterDisplay.textContent = String(count);
 });
+
+const colorSelect = document.getElementById("colorSelect") as HTMLSelectElement;
+const colorBox = document.getElementById("colorBox") as HTMLDivElement;
+
+colorSelect.addEventListener("change", (event: Event) => {
+    const select = event.target as HTMLSelectElement;
+    colorBox.style.backgroundColor = select.value;
+});

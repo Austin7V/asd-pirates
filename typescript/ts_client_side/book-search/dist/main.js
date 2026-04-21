@@ -26,6 +26,10 @@ function createCard(book) {
     <img src="${book.image}" alt="${book.title}">
     <a href="${book.url}">Read more</a>
     </img>`;
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => container.remove());
+    container.append(deleteBtn);
     return container;
 }
 async function fetchBooks(term) {
@@ -48,5 +52,23 @@ const toggleBtn = document.getElementById("toggleBtn");
 const hiddenText = document.getElementById("hiddenText");
 toggleBtn.addEventListener("click", () => {
     hiddenText.style.display = hiddenText.style.display === "none" ? "" : "none";
+});
+const decreaseBtn = document.getElementById("decreaseBtn");
+const counterDisplay = document.getElementById("counter");
+const increaseBtn = document.getElementById("increaseBtn");
+let count = 0;
+decreaseBtn.addEventListener("click", () => {
+    count -= 1;
+    counterDisplay.textContent = String(count);
+});
+increaseBtn.addEventListener("click", () => {
+    count += 1;
+    counterDisplay.textContent = String(count);
+});
+const colorSelect = document.getElementById("colorSelect");
+const colorBox = document.getElementById("colorBox");
+colorSelect.addEventListener("change", (event) => {
+    const select = event.target;
+    colorBox.style.backgroundColor = select.value;
 });
 //# sourceMappingURL=main.js.map
