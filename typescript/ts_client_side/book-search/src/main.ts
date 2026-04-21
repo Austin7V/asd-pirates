@@ -85,3 +85,19 @@ const hiddenText = document.getElementById("hiddenText") as HTMLParagraphElement
 toggleBtn.addEventListener("click", () => {
     hiddenText.style.display = hiddenText.style.display === "none" ? "" : "none";
 });
+
+const decreaseBtn = document.getElementById("decreaseBtn") as HTMLButtonElement;
+const counterDisplay = document.getElementById("counter") as HTMLSpanElement;
+const increaseBtn = document.getElementById("increaseBtn") as HTMLButtonElement;
+
+let count = 0;
+
+decreaseBtn.addEventListener("click", () => {
+    count -= 1;
+    counterDisplay.textContent = String(count);
+});
+
+increaseBtn.addEventListener("click", () => {
+    count += 1;
+    counterDisplay.textContent = String(count);
+});
