@@ -49,6 +49,11 @@ function createCard(book: Book): HTMLLIElement {
     <a href="${book.url}">Read more</a>
     </img>`;
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+    deleteBtn.addEventListener("click", () => container.remove());
+    container.append(deleteBtn);
+
     return container;
 }
 
