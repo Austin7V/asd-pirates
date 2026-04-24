@@ -14,6 +14,7 @@ type Book = {
 
 const API_URL = "http://localhost:4730/books";
 const bookList = document.querySelector<HTMLTableSectionElement>("#book-list");
+const bookCount = document.querySelector<HTMLHeadingElement>("#book-count");
 
 async function loadBooks() {
     const response = await fetch(API_URL);
@@ -26,7 +27,9 @@ function renderBooks(books: Book[]) {
     if (!bookList) {
         return;
     }
-
+    if (bookCount) {
+        bookCount.textContent = `${books.length} Books displayed`;
+    }
     for (const book of books) {
         const row = document.createElement("tr");
 
