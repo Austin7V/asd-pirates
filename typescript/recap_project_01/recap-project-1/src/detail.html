@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"
+    />
+
+    <!-- CSS Reset -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+    />
+
+    <!-- Milligram CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <!-- You should properly set the path from the main file. -->
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container">
+        <div class="row">
+          <div class="column"><p class="logo">IT.Book.Library</p></div>
+          <div class="column">
+            <nav class="mainnav">
+              <a href="index.html" class="mainnav-link mainnav-link--active"
+                >Books</a
+              >
+              <a href="favorite.html" class="mainnav-link"
+                >Favorites <span class="mainnav-number">2</span></a
+              >
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="container">
+      <h1>
+        Java Web Scraping Handbook<br />
+        <small>Learn advanced Web Scraping techniques</small>
+      </h1>
+      <section class="row">
+        <div class="column column-67">
+          <h3>Abstract</h3>
+          <p>
+            Web scraping or crawling is the art of fetching data from a third
+            party website by downloading and parsing the HTML code to extract
+            the data you want. It can be hard. From bad HTML code to heavy
+            Javascript use and anti-bot techniques, it is often tricky. Lots of
+            companies use it to obtain knowledge ...
+          </p>
+
+          <h4>Details</h4>
+          <ul>
+            <li><strong>Author:</strong> Kevin Sahin</li>
+            <li><strong>Publisher:</strong> Leanpub</li>
+            <li><strong>Pages:</strong> 115</li>
+          </ul>
+
+          <button
+            class="button button-outline"
+            onclick="location.href='index.html'"
+          >
+            Back
+          </button>
+        </div>
+        <div class="column column-33">
+          <img src="images/1001606140805.png" alt="" />
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
