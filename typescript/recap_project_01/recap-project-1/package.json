@@ -1,0 +1,20 @@
+{
+  "name": "recap-project-1",
+  "version": "1.0.0",
+  "description": "This is the template repository for the recap project 1. It contains the source code for the IT-Book Library application. Take a look into the `./src` directory. You will find the basic HTML for your application as well as CSS for some styling.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite src",
+    "build": "tsc && vite build src",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "typescript": "^6.0.3",
+    "vite": "^8.0.10"
+  }
+}
