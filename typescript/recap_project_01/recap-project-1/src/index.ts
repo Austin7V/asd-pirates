@@ -15,17 +15,32 @@ type Book = {
 const API_URL = "http://localhost:4730/books";
 const bookList = document.querySelector<HTMLTableSectionElement>("#book-list");
 const bookCount = document.querySelector<HTMLHeadingElement>("#book-count");
+const searchInput = document.querySelector<HTMLInputElement>("#search");
+let allBooks: Book[] = [];
 
 async function loadBooks() {
     const response = await fetch(API_URL);
     const books: Book[] = await response.json();
-    console.log(books);
-    renderBooks(books);
+
+    allBooks = books;
+
+    console.log(allBooks);
+    renderBooks(allBooks);
 }
 
 function renderBooks(books: Book[]) {
     if (!bookList) {
         return;
+    }
+    bookList.innerHTML = "";
+    if (searchInput) {
+        searchInput.addEventListener("input", ()=> {
+            const searchText = searchInput.value.toLowerCase();
+            const filteredBooks = allBooks.filter((book) => {
+                return book.title.toLowerCase().includes(searchText) || book.author.toLowerCase().includes(searchText);
+            });
+            renderBooks(filteredBooks);
+        });
     }
     if (bookCount) {
         bookCount.textContent = `${books.length} Books displayed`;
