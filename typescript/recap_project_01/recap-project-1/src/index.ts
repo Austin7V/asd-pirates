@@ -109,17 +109,35 @@ function renderPublisherOptions(books: Book[]) {
 }
 if (searchInput) {
     searchInput.addEventListener("input", () => {
-        const searchText = searchInput.value.toLowerCase();
+        applyFilters();
+    });
+}
+if (publisherSelect) {
+    publisherSelect.addEventListener("change", () => {
+        applyFilters();
+    });
+}
 
-        const filteredBooks = allBooks.filter((book) => {
+function applyFilters() {
+    let filteredBooks = allBooks;
+    if (searchInput) {
+        const searchText = searchInput.value.toLowerCase();
+        filteredBooks = filteredBooks.filter((book) => {
             return (
                 book.title.toLowerCase().includes(searchText) ||
                 book.author.toLowerCase().includes(searchText)
             );
         });
-
-        renderBooks(filteredBooks);
-    });
+    }
+    if (publisherSelect) {
+        const selectedPublisher = publisherSelect.value;
+        if(selectedPublisher !== "") {
+            filteredBooks = filteredBooks.filter((book) => {
+                return book.publisher === selectedPublisher;
+            });
+        }
+    }
+    renderBooks(filteredBooks);
 }
 
 loadBooks();
