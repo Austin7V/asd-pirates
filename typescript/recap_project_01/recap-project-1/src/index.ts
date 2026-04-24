@@ -16,6 +16,8 @@ const API_URL = "http://localhost:4730/books";
 const bookList = document.querySelector<HTMLTableSectionElement>("#book-list");
 const bookCount = document.querySelector<HTMLHeadingElement>("#book-count");
 const searchInput = document.querySelector<HTMLInputElement>("#search");
+const publisherSelect = document.querySelector<HTMLSelectElement>("#by-publisher");
+
 let allBooks: Book[] = [];
 
 async function loadBooks() {
@@ -23,8 +25,7 @@ async function loadBooks() {
     const books: Book[] = await response.json();
 
     allBooks = books;
-
-    console.log(allBooks);
+    renderPublisherOptions(allBooks);
     renderBooks(allBooks);
 }
 
@@ -32,19 +33,14 @@ function renderBooks(books: Book[]) {
     if (!bookList) {
         return;
     }
-    bookList.innerHTML = "";
-    if (searchInput) {
-        searchInput.addEventListener("input", ()=> {
-            const searchText = searchInput.value.toLowerCase();
-            const filteredBooks = allBooks.filter((book) => {
-                return book.title.toLowerCase().includes(searchText) || book.author.toLowerCase().includes(searchText);
-            });
-            renderBooks(filteredBooks);
-        });
+    if (!publisherSelect) {
+        return;
     }
+
     if (bookCount) {
         bookCount.textContent = `${books.length} Books displayed`;
     }
+    bookList.innerHTML = "";
     for (const book of books) {
         const row = document.createElement("tr");
 
@@ -85,4 +81,45 @@ function renderBooks(books: Book[]) {
     }
 }
 
-loadBooks()
+function renderPublisherOptions(books: Book[]) {
+    if (!publisherSelect) {
+        return;
+    }
+    publisherSelect.innerHTML = "";
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "All Publishers";
+    publisherSelect.append(defaultOption);
+
+    const publishers: string[]=[];
+
+    for(const book of books) {
+        if (!publishers.includes(book.publisher)) {
+            publishers.push(book.publisher);
+        }
+    }
+    for (const publisher of publishers) {
+        const option = document.createElement("option");
+        option.value = publisher;
+        option.textContent = publisher;
+        publisherSelect.append(option);
+    }
+
+}
+if (searchInput) {
+    searchInput.addEventListener("input", () => {
+        const searchText = searchInput.value.toLowerCase();
+
+        const filteredBooks = allBooks.filter((book) => {
+            return (
+                book.title.toLowerCase().includes(searchText) ||
+                book.author.toLowerCase().includes(searchText)
+            );
+        });
+
+        renderBooks(filteredBooks);
+    });
+}
+
+loadBooks();
