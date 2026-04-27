@@ -1,9 +1,14 @@
 import type {Book} from "./types";
+import { isFavorite, toggleFavoriteId } from "./favorite";
+import { renderFavoriteCount } from "./renderFavoriteCount";
 
 export function renderBooks(
     books: Book[],
     bookList: HTMLTableSectionElement | null = document.querySelector("#book-list"),
-    bookCount: HTMLHeadingElement | null = document.querySelector("#book-count"),) {
+    bookCount: HTMLHeadingElement | null = document.querySelector("#book-count"),
+    favoriteCount: HTMLSpanElement | null = document.querySelector("#favorite-count"),
+onFavoriteChange?: () => void
+) {
     if (!bookList) {
         return;
     }
@@ -16,8 +21,17 @@ export function renderBooks(
 
         const favoriteCell = document.createElement("td");
         const favoriteButton = document.createElement("button");
+
         favoriteButton.className = "button button-clear fav-btn";
-        favoriteButton.textContent = "";
+        favoriteButton.textContent = isFavorite(book.id) ? "♥" : "♡";
+        favoriteButton.addEventListener("click", () => {
+            toggleFavoriteId(book.id);
+            favoriteButton.textContent = isFavorite(book.id) ? "♥" : "♡";
+            renderFavoriteCount(favoriteCount);
+            if (onFavoriteChange) {
+                onFavoriteChange();
+            }
+        });
         favoriteCell.append(favoriteButton);
 
         const titleCell = document.createElement("td");
