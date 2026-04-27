@@ -1,5 +1,5 @@
-import type {Book} from "./types";
-import { isFavorite, toggleFavoriteId } from "./favorite";
+import type {Book} from "../types/types";
+import { isFavorite, toggleFavoriteId } from "../utils/favorite";
 import { renderFavoriteCount } from "./renderFavoriteCount";
 
 export function renderBooks(

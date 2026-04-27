@@ -1,10 +1,10 @@
-import type { Book } from "./types";
-import { fetchBooks } from "./api";
-import { renderBooks } from "./renderBooks";
-import { renderPublisherOptions } from "./renderPublisherOptions";
-import { applyFilters } from "./filters";
-import { toggleFavoriteId, getFavoriteIds } from "./favorite";
-import { renderFavoriteCount } from "./renderFavoriteCount";
+import type { Book } from "../types/types";
+import { fetchBooks } from "../api/api";
+import { renderBooks } from "../render/renderBooks";
+import { renderPublisherOptions } from "../render/renderPublisherOptions";
+import { applyFilters } from "../utils/filters";
+import { toggleFavoriteId, getFavoriteIds } from "../utils/favorite";
+import { renderFavoriteCount } from "../render/renderFavoriteCount";
 
 toggleFavoriteId("test-book-id");
 console.log(getFavoriteIds());

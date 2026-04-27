@@ -1,8 +1,8 @@
-import type { Book } from "./types";
-import { fetchBooks } from "./api";
-import { getFavoriteIds } from "./favorite";
-import { renderBooks } from "./renderBooks";
-import { renderFavoriteCount } from "./renderFavoriteCount";
+import type { Book } from "../types/types";
+import { fetchBooks } from "../api/api";
+import { getFavoriteIds } from "../utils/favorite";
+import { renderBooks } from "../render/renderBooks";
+import { renderFavoriteCount } from "../render/renderFavoriteCount";
 
 const bookList = document.querySelector<HTMLTableSectionElement>("#book-list");
 const bookCount = document.querySelector<HTMLHeadingElement>("#book-count");
