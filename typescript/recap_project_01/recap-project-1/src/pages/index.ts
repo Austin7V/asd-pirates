@@ -11,7 +11,7 @@ console.log(getFavoriteIds());
 
 const bookList = document.querySelector<HTMLTableSectionElement>("#book-list");
 const bookCount = document.querySelector<HTMLHeadingElement>("#book-count");
-const searchInput = document.querySelector<HTMLInputElement>("#search");
+const searchInput = document.querySelector<HTMLInputElement>("#search")!;
 const publisherSelect = document.querySelector<HTMLSelectElement>("#by-publisher");
 const favoriteCount = document.querySelector<HTMLSpanElement>("#favorite-count");
 

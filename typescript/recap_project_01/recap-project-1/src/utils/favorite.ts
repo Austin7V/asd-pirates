@@ -20,10 +20,6 @@ export function isFavorite(bookId: string) {
 
 export function addFavoriteId(bookId: string) {
     const favoriteIds = getFavoriteIds();
-    if (favoriteIds.includes(bookId)) {
-        return;
-    }
-
     favoriteIds.push(bookId);
     saveFavoriteIds(favoriteIds);
 }
