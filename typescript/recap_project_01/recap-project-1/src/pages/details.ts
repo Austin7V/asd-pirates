@@ -1,4 +1,4 @@
-import type { Book } from "./types";
+import type { Book } from "../types/types";
 
 const API_URL = "http://localhost:4730/books";
 
