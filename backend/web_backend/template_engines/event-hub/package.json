@@ -7,6 +7,7 @@
     "@types/bun": "latest",
     "@types/express": "^5.0.6",
     "@types/nunjucks": "^3.2.6",
+    "chokidar": "^5.0.0",
     "prettier": "^3.8.3",
     "prettier-plugin-jinja-template": "^2.1.0"
   },

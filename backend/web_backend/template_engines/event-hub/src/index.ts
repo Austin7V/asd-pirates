@@ -7,12 +7,12 @@ const port = 3000;
 nunjucks.configure("views", {
     autoescape: true,
     express: app,
+    noCache: true,
+    watch: true,
 });
 
 app.get("/", (req, res) => {
-    res.render("index.html", {
-        title: "HAllo World!",
-    });
+    res.render("index.html");
 });
 
 app.listen(port, () => {
