@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Events Info{% endblock %}
+
+{% block content %}
+<h2>Its All Events!</h2>
+
+<ul>
+    {% for event in events %}
+    <li>
+        <h3>{{ event.name }}</h3>
+        <p>{{ event.date }} — {{ event.location }}</p>
+
+        <h3>{% if event.soldOut %}
+        <span class="badge">Sold out</span>
+        {% endif %}
+        </h3>
+    </li>
+    {% else %}
+    <li>No events scheduled</li>
+    {% endfor %}
+</ul>
+{% endblock %}
