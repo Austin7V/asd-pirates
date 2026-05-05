@@ -1,4 +1,4 @@
-import express from "express";
+import express, {request} from "express";
 
 interface Bookmark {
     id: number;
@@ -31,6 +31,17 @@ app.get("/", (_request, response) => {
 app.get("/bookmark", (_request, response)=> {
     response.status(200).json(bookmarks);
 });
+
+app.get("/bookmark/:id",(request, response)=> {
+    const id = Number(request.params.id);
+
+    const bookmark = bookmarks.find((bokmark)=> bokmark.id===id);
+    if (!bookmark) {
+        response.status(404).json({error:"Bookmark not found"});
+        return;
+    }
+    response.status(200).json(bookmark);
+})
 
 app.listen(port, ()=> {
     console.log(`Server is running on http://localhost:${port}`);
