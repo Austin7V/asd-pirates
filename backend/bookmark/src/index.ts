@@ -57,6 +57,18 @@ app.post("/bookmarks", (request, response)=> {
     response.status(201).json(newBookmark);
 });
 
+app.delete("/bookmarks/:id", (request, response)=>{
+    const id = Number(request.params.id);
+    const bookmarksBeforeDelete = bookmarks.length;
+    bookmarks = bookmarks.filter((bookmark)=> bookmark.id !==id);
+
+    if(bookmarks.length === bookmarksBeforeDelete) {
+        response.status(404).json({error: "Bookmark not found"});
+        return;
+    }
+    response.status(204).send();
+})
+
 app.listen(port, ()=> {
     console.log(`Server is running on http://localhost:${port}`);
 });
