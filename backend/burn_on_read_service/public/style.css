@@ -32,3 +32,17 @@ button {
     cursor: pointer;
     font-weight: bold;
 }
+
+.message-link {
+    display: block;
+    margin: 16px 0;
+    padding: 12px;
+    background: #930909;
+    border-radius: 8px;
+    color: #ff0000;
+    word-break: break-all;
+}
+
+.hint {
+    color: #d1d5db;
+}
