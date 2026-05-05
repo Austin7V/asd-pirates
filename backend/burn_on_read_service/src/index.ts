@@ -46,6 +46,23 @@ app.post("/messages", async (request, response) => {
     response.status(201).render("result.html", { link });
 })
 
+app.get("/messages/:id", async (request, responce)=> {
+    const messageId = request.params.id;
+    if (!messageId) {
+        response.status(404).render("not-dound.html");
+        return;
+    }
+
+    const messagePath = path.join(messagesDirectory, `${messageId}.txt`);
+    try {
+        const message = await fs.readFile(messagePath, "utf-8");
+        await fs.unlink(messagePath);
+        responce.status(200).render("message.html", { message });
+    } catch {
+        response.status(404).render("not-found.html");
+    }
+});
+
 app.listen(port, ()=> {
     console.log(`server läuft auf http//localhost:${port}`);
 });

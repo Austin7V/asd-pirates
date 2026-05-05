@@ -46,3 +46,12 @@ button {
 .hint {
     color: #d1d5db;
 }
+
+.message-box {
+    white-space: pre-wrap;
+    padding: 16px;
+    background: #930909;
+    border-radius: 8px;
+    color: #f9fafb;
+    line-height: 1.6;
+}
