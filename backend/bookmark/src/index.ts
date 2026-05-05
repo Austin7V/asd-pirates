@@ -28,11 +28,23 @@ app.get("/", (_request, response) => {
     response.status(200).json({ message: "Bookmark manager API is Running"});
 });
 
-app.get("/bookmark", (_request, response)=> {
-    response.status(200).json(bookmarks);
+app.get("/bookmarks", (request, response)=> {
+    const tag = request.query.tag;
+
+    if (!tag) {
+        response.status(200).json(bookmarks);
+        return;
+    }
+    if(typeof tag !=="string") {
+        response.status(400).json({error: "Invalid tag query parameter"});
+        return;
+    }
+    const filteredBookmarks = bookmarks.filter((bookmarks) => bookmarks.tag === tag);
+
+    response.status(200).json(filteredBookmarks);
 });
 
-app.get("/bookmark/:id",(request, response)=> {
+app.get("/bookmarks/:id",(request, response)=> {
     const id = Number(request.params.id);
 
     const bookmark = bookmarks.find((bokmark)=> bokmark.id===id);
