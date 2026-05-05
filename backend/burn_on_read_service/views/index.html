@@ -1,0 +1,27 @@
+<!
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Burn on Read</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main class="container">
+    <h1> Burn on Read</h1>
+    <p>Schreibe eine geheime Nachricht. Sie kann nur einmal gelesen werden.</p>
+
+    <form method="POST" action="/messages">
+        <label for="message">Nachricht</label>
+        <textarea
+            id="message"
+            name="message"
+            rows="6"
+            placeholder="Deine geheime Nachricht..."
+            required
+        ></textarea>
+        <button type="submit">Link erstellen</button>
+    </form>
+</main>
+</body>
+</html>
