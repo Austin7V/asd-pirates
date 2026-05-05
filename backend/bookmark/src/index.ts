@@ -81,6 +81,33 @@ app.delete("/bookmarks/:id", (request, response)=>{
     response.status(204).send();
 })
 
+app.patch("/bookmarks/:id", (request, response)=> {
+    const id = Number(request.params.id);
+    const bookmarkIndex = bookmarks.findIndex((bookmarks)=> bookmarks.id === id);
+
+    if(bookmarkIndex === -1) {
+        response.status(404).json({error: "Bookmark not found"});
+        return;
+    }
+
+    const { url, title, tag} = request.body;
+    const oldBookmark = bookmarks[bookmarkIndex];
+    if(!oldBookmark) {
+        response.status(404).json({error: "Bookmark not found"});
+        return;
+    }
+
+    const updatedBookmark: Bookmark = {
+        ...oldBookmark,
+        url: url ?? oldBookmark.url,
+        title: title ?? oldBookmark.title,
+        tag: tag ?? oldBookmark.tag,
+    };
+
+    bookmarks[bookmarkIndex] = updatedBookmark;
+    response.status(200).json(updatedBookmark);
+})
+
 app.listen(port, ()=> {
     console.log(`Server is running on http://localhost:${port}`);
 });
