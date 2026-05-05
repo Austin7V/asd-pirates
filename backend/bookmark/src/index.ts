@@ -24,11 +24,11 @@ let bookmarks: Bookmark[] = [
     { id: 3, url: "https://developer.mozilla.org", title: "MDN Web Docs" },
 ];
 
-app.get("/", (request, response) => {
+app.get("/", (_request, response) => {
     response.status(200).json({ message: "Bookmark manager API is Running"});
 });
 
-app.get("/bookmark", (request, response)=> {
+app.get("/bookmark", (_request, response)=> {
     response.status(200).json(bookmarks);
 });
 
