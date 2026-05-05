@@ -43,6 +43,20 @@ app.get("/bookmark/:id",(request, response)=> {
     response.status(200).json(bookmark);
 })
 
+app.post("/bookmarks", (request, response)=> {
+    const {url, title, tag} = request.body;
+    const nextId = bookmarks.length + 1;
+
+    const newBookmark: Bookmark = {
+        id: nextId,
+        url,
+        title,
+        tag,
+    };
+    bookmarks.push(newBookmark);
+    response.status(201).json(newBookmark);
+});
+
 app.listen(port, ()=> {
     console.log(`Server is running on http://localhost:${port}`);
 });
