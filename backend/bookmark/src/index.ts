@@ -57,6 +57,16 @@ app.get("/bookmarks/:id",(request, response)=> {
 
 app.post("/bookmarks", (request, response)=> {
     const {url, title, tag} = request.body;
+
+    if(!url) {
+        response.status(400).json({error: "Missing required field: url"});
+        return;
+    }
+    if(!title) {
+        response.status(400).json({error: "Missing required field: title"});
+        return;
+    }
+
     const nextId = bookmarks.length + 1;
 
     const newBookmark: Bookmark = {
