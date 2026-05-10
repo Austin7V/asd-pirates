@@ -1,5 +1,9 @@
 import type { Request, Response} from "express";
-import { addPost, getAllPosts, slugify} from "../models/postModel";
+import {
+    addPost,
+    getAllPosts,
+    getPostBySlug,
+    slugify} from "../models/postModel";
 import sanitizeHtml from "sanitize-html";
 
 const allowedHtmlOptions = {
@@ -75,4 +79,28 @@ export function createPost(req: Request, res: Response) {
 
         addPost(newPost);
         res.redirect("/admin");
+}
+
+export function renderEditPostForm(req: Request, res: Response) {
+    const slug = Array.isArray(req.params.slug)
+        ? req.params.slug[0]
+        : req.params.slug;
+
+    if(!slug) {
+        res.status(400).send("Mussing slug");
+        return;
+    }
+    const post = getPostBySlug(slug);
+
+    if(!post) {
+        res.status(400).send("Post not found");
+        return;
+    }
+
+    res.render("adminPostForm.html", {
+        pageTitle: "Edit Post",
+        formAction: `/admin/posts/${slug}`,
+        submitLabel: "Save Changes",
+        post,
+    });
 }
