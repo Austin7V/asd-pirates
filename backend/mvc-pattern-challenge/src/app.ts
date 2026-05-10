@@ -16,6 +16,9 @@ const cssDir = path.join(projectRoot, "src", "css");
 nunjucks.configure(projectRoot, { autoescape: true, express: app });
 app.use("/assets", express.static(assetsDir));
 app.use("/css", express.static(cssDir));
+
+app.use(express.urlencoded({ extended: true }));
+
 app.use("/", blogRoutes);
 app.use("/admin", adminRoute);
 

@@ -11,3 +11,18 @@ export function renderAdminPage(_req: Request, res: Response) {
         posts:viewPosts,
     });
 }
+
+export function renderNewPostForm(_req: Request, res: Response) {
+    res.render("adminPostForm.html", {
+        pageTitle: "Create New Post",
+        formAction: "/admin/posts",
+        submitLabel: "Create Post",
+        post: {
+            title: "",
+            image: "",
+            author: "",
+            teaser: "",
+            content: "",
+        },
+    });
+}
