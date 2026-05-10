@@ -3,7 +3,10 @@ import {
     addPost,
     getAllPosts,
     getPostBySlug,
-    slugify} from "../models/postModel";
+    slugify,
+updatePost,
+    type Post,
+} from "../models/postModel";
 import sanitizeHtml from "sanitize-html";
 
 const allowedHtmlOptions = {
@@ -26,6 +29,38 @@ const allowedHtmlOptions = {
         img: ["src", "alt"],
     },
 };
+
+export interface Post {
+    title: string;
+    image: string;
+    author: string;
+    createdAt: number;
+    teaser: string;
+    content: string;
+}
+
+function getPostDataFromRequestBody(body: Request["body"]): Post | null {
+    const { title, image, author, teaser, content } = body;
+
+    if (
+        typeof title !== "string" ||
+        typeof image !== "string" ||
+        typeof author !== "string" ||
+        typeof teaser !== "string" ||
+        typeof content !== "string"
+    ) {
+        return null;
+    }
+
+    return {
+        title: title.trim(),
+        image: image.trim(),
+        author: author.trim(),
+        createdAt: Math.floor(Date.now() / 1000),
+        teaser: teaser.trim(),
+        content: sanitizeHtml(content, allowedHtmlOptions),
+    };
+}
 
 export function renderAdminPage(_req: Request, res: Response) {
     const posts = getAllPosts();
@@ -54,31 +89,16 @@ export function renderNewPostForm(_req: Request, res: Response) {
 }
 
 export function createPost(req: Request, res: Response) {
-    const { title, image, author, teaser, content } = req.body;
+    const newPost = getPostDataFromRequestBody(req.body);
 
-        if(
-            typeof title !== "string" ||
-            typeof image !== "string" ||
-            typeof author !== "string" ||
-            typeof  teaser !== "string" ||
-            typeof  content !== "string"
-    ) {
-            res.status(400).send("Invalid form data");
-            return;
-        }
+    if (!newPost) {
+        res.status(400).send("Invalid form data");
+        return;
+    }
 
-        const newPost = {
-            title: title.trim(),
-            image: image.trim(),
-            author: author.trim(),
-            createdAt: Math.floor(Date.now() / 1000),
-            teaser: teaser.trim(),
+    addPost(newPost);
 
-            content: sanitizeHtml(content, allowedHtmlOptions),
-        };
-
-        addPost(newPost);
-        res.redirect("/admin");
+    res.redirect("/admin");
 }
 
 export function renderEditPostForm(req: Request, res: Response) {
@@ -103,4 +123,30 @@ export function renderEditPostForm(req: Request, res: Response) {
         submitLabel: "Save Changes",
         post,
     });
+}
+
+export function saveEditedPost(req: Request, res: Response) {
+    const slug = Array.isArray(req.params.slug)
+        ? req.params.slug[0]
+        : req.params.slug;
+
+    if (!slug) {
+        res.status(400).send("Missing slug");
+        return;
+    }
+
+    const updatedPost = getPostDataFromRequestBody(req.body);
+
+    if (!updatedPost) {
+        res.status(400).send("Invalid form data");
+        return;
+    }
+
+    const wasUpdated = updatePost(slug, updatedPost);
+
+    if (!wasUpdated) {
+        res.status(404).send("Post not found");
+        return;
+    }
+    res.redirect("/admin");
 }

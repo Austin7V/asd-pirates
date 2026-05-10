@@ -65,3 +65,16 @@ export function addPost(post: Post): void {
     const updatedPosts = [post, ...posts];
     writePosts(updatedPosts);
 }
+
+export function updatePost(slug: string, changes: Post): boolean {
+    const posts = getAllPosts();
+    const postIndex = posts.findIndex((post)=> slugify(post.title) === slug);
+
+    if (postIndex === -1) {
+        return false;
+    }
+    posts[postIndex]=changes;
+
+    writePosts(posts);
+    return true;
+}
