@@ -3,6 +3,7 @@ import nunjucks from "nunjucks";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import blogRoutes from "./routes/blogRoutes";
+import adminRoute from "./routes/adminRoute";
 
 const app = express();
 
@@ -16,6 +17,7 @@ nunjucks.configure(projectRoot, { autoescape: true, express: app });
 app.use("/assets", express.static(assetsDir));
 app.use("/css", express.static(cssDir));
 app.use("/", blogRoutes);
+app.use("/admin", adminRoute);
 
 const port = Number(process.env.PORT) || 3000;
 
