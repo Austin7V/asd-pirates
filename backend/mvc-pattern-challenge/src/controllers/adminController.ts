@@ -1,6 +1,7 @@
 import type { Request, Response} from "express";
 import {
     addPost,
+    deletePost,
     getAllPosts,
     getPostBySlug,
     slugify,
@@ -29,15 +30,6 @@ const allowedHtmlOptions = {
         img: ["src", "alt"],
     },
 };
-
-export interface Post {
-    title: string;
-    image: string;
-    author: string;
-    createdAt: number;
-    teaser: string;
-    content: string;
-}
 
 function getPostDataFromRequestBody(body: Request["body"]): Post | null {
     const { title, image, author, teaser, content } = body;
@@ -148,5 +140,25 @@ export function saveEditedPost(req: Request, res: Response) {
         res.status(404).send("Post not found");
         return;
     }
+    res.redirect("/admin");
+}
+
+export function deleteExistingPost(req: Request, res: Response) {
+    const slug = Array.isArray(req.params.slug)
+        ? req.params.slug[0]
+        : req.params.slug;
+
+    if (!slug) {
+        res.status(400).send("Missing slug");
+        return;
+    }
+
+    const wasDeleted = deletePost(slug);
+
+    if (!wasDeleted) {
+        res.status(404).send("Post not found");
+        return;
+    }
+
     res.redirect("/admin");
 }

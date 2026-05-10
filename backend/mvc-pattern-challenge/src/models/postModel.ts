@@ -48,7 +48,7 @@ export function slugify(title: string): string {
 }
 
 export function getAllPosts(): Post[] {
-    return seedPosts;
+    return [...seedPosts];
 }
 
 export function getPostBySlug(slug: string): Post | undefined {
@@ -56,8 +56,10 @@ export function getPostBySlug(slug: string): Post | undefined {
 }
 
 export function writePosts(posts: Post[]): void {
+    const postsToWrite = [...posts];
+
     seedPosts.length = 0;
-    seedPosts.push(...posts);
+    seedPosts.push(...postsToWrite);
 }
 
 export function addPost(post: Post): void {
@@ -76,5 +78,26 @@ export function updatePost(slug: string, changes: Post): boolean {
     posts[postIndex]=changes;
 
     writePosts(posts);
+    return true;
+}
+
+export interface Post {
+    title: string;
+    image: string;
+    author: string;
+    createdAt: number;
+    teaser: string;
+    content: string;
+}
+
+export function deletePost(slug:string): boolean {
+    const posts = getAllPosts();
+    const updatePosts = posts.filter((post) => slugify(post.title) !== slug);
+
+    if(updatePosts.length === posts.length) {
+        return false;
+    }
+
+    writePosts(updatePosts);
     return true;
 }

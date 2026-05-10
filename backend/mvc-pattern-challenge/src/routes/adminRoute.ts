@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
     createPost,
+    deleteExistingPost,
     renderAdminPage,
     renderEditPostForm,
     renderNewPostForm,
@@ -13,5 +14,6 @@ router.get("/posts/new", renderNewPostForm);
 router.post("/posts", createPost);
 router.get("/posts/:slug/edit", renderEditPostForm);
 router.post("/posts/:slug", saveEditedPost);
+router.post("/posts/:slug/delete", deleteExistingPost);
 
 export default router;
