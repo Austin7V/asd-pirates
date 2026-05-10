@@ -1,11 +1,13 @@
 import { Router } from "express";
 import {
+    createPost,
     renderAdminPage,
     renderNewPostForm,
-} from "../controllers/adminCrontroller";
+} from "../controllers/adminController";
 
 const router = Router();
 router.get("/", renderAdminPage);
-router.get("/post/new", renderNewPostForm);
+router.get("/posts/new", renderNewPostForm);
+router.post("/posts", createPost);
 
 export default router;

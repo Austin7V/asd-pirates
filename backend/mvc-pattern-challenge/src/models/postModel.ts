@@ -59,3 +59,9 @@ export function writePosts(posts: Post[]): void {
     seedPosts.length = 0;
     seedPosts.push(...posts);
 }
+
+export function addPost(post: Post): void {
+    const posts = getAllPosts();
+    const updatedPosts = [post, ...posts];
+    writePosts(updatedPosts);
+}
